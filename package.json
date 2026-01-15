@@ -1,6 +1,6 @@
 {
   "name": "@mulmochat-plugin/form",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Form plugin for MulmoChat",
   "type": "module",
   "main": "./dist/index.cjs",
