@@ -12,7 +12,8 @@
  */
 
 import type { ToolPlugin, ToolContext, ToolResult } from "../common";
-import { TOOL_DEFINITION, type FormData, type FormArgs, type FormField } from "./types";
+import { TOOL_DEFINITION } from "./tools";
+import type { FormData, FormArgs, FormField } from "./types";
 import { SAMPLES } from "./samples";
 import View from "./View.vue";
 import Preview from "./Preview.vue";
