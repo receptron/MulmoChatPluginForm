@@ -1,11 +1,7 @@
 /**
- * MulmoChat Form Plugin
+ * MulmoChat Plugin
  *
- * @example
- * ```typescript
- * import FormPlugin from "@mulmochat-plugin/form";
- * import "@mulmochat-plugin/form/style.css";
- * ```
+ * See package.json for plugin details.
  */
 
 import "./style.css";
