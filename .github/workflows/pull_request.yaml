@@ -34,3 +34,15 @@ jobs:
     - run: yarn run typecheck
     - run: yarn run lint
     - run: yarn run build
+    - name: Update version with timestamp
+      run: |
+        TIMESTAMP=$(date +%Y%m%d%H%M%S)
+        VERSION=$(node -p "require('./package.json').version")
+        NEW_VERSION="${VERSION}-${TIMESTAMP}"
+        npm version $NEW_VERSION --no-git-tag-version
+    - run: npm pack
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: npm-package
+        path: "*.tgz"

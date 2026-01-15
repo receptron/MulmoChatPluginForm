@@ -14,6 +14,9 @@ export interface ToolContext {
   currentResult?: ToolResult<unknown> | null;
   userPreferences?: Record<string, unknown>;
   getPluginConfig?: <T = unknown>(key: string) => T | undefined;
+  /** Backend API functions provided by the host app */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  app?: Record<string, (...args: any[]) => any>;
 }
 
 /**
