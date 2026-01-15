@@ -374,7 +374,7 @@ import type {
   NumberField,
   DateField,
   CheckboxField,
-} from "../plugin";
+} from "./types";
 
 interface FieldError {
   fieldId: string;

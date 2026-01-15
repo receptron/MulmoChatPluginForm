@@ -72,16 +72,16 @@ yarn lint
 MulmoChatPluginForm/
 ├── src/
 │   ├── index.ts          # Export definitions
-│   ├── plugin.ts         # Form-specific plugin implementation
-│   ├── types.ts          # Re-exports common types (backward compat)
 │   ├── style.css         # Tailwind CSS entry
 │   ├── common/           # Plugin-agnostic shared code
 │   │   ├── index.ts      # Common exports
 │   │   └── types.ts      # ToolPlugin, ToolResult, etc.
-│   ├── views/
-│   │   └── FormView.vue  # Form-specific view component
-│   └── previews/
-│       └── FormPreview.vue  # Form-specific preview
+│   └── plugin/           # Form-specific implementation
+│       ├── index.ts      # Plugin instance and execute logic
+│       ├── types.ts      # Form types and TOOL_DEFINITION
+│       ├── samples.ts    # Sample data for testing
+│       ├── View.vue      # Main view component
+│       └── Preview.vue   # Sidebar preview component
 ├── demo/                 # Generic plugin demo
 │   ├── App.vue
 │   └── main.ts
