@@ -1,6 +1,6 @@
 {
   "name": "@mulmochat-plugin/form",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Form plugin for MulmoChat",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -11,6 +11,16 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core.js",
+      "require": "./dist/core.cjs"
+    },
+    "./vue": {
+      "types": "./dist/vue/index.d.ts",
+      "import": "./dist/vue.js",
+      "require": "./dist/vue.cjs"
     },
     "./style.css": "./dist/style.css"
   },

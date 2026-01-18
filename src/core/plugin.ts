@@ -1,28 +1,294 @@
 /**
- * MulmoChat Form Plugin
+ * MulmoChat Form Plugin Core (Framework-agnostic)
  *
- * A plugin for creating structured forms to collect user information.
- *
- * @example Basic usage
- * ```typescript
- * import { plugin } from "@mulmochat-plugin/form";
- * import "@mulmochat-plugin/form/style.css";
- * // Use plugin directly
- * ```
+ * Contains the plugin logic without UI components.
+ * Can be used by any framework (Vue, React, etc.)
  */
 
-import type { ToolPlugin, ToolContext, ToolResult } from "../common";
-import { TOOL_DEFINITION } from "./tools";
-import type { FormData, FormArgs, FormField } from "./types";
-import { SAMPLES } from "./samples";
-import View from "./View.vue";
-import Preview from "./Preview.vue";
+import type {
+  ToolPluginCore,
+  ToolContext,
+  ToolResult,
+  ToolDefinition,
+  ToolSample,
+  FormData,
+  FormArgs,
+  FormField,
+} from "./types";
 
 // ============================================================================
-// Plugin Implementation
+// Tool Definition
 // ============================================================================
 
-const presentForm = async (
+export const TOOL_NAME = "presentForm";
+
+export const TOOL_DEFINITION: ToolDefinition = {
+  type: "function",
+  name: TOOL_NAME,
+  description:
+    "Create a structured form to collect information from the user. Supports various field types including text input, textarea, multiple choice (radio), dropdown menus, checkboxes, date/time pickers, and number inputs. Each field can have validation rules and help text.",
+  parameters: {
+    type: "object",
+    properties: {
+      title: {
+        type: "string",
+        description: "Optional title for the form (e.g., 'User Registration')",
+      },
+      description: {
+        type: "string",
+        description: "Optional description explaining the purpose of the form",
+      },
+      fields: {
+        type: "array",
+        description:
+          "Array of form fields with various types and configurations",
+        items: {
+          type: "object",
+          properties: {
+            id: {
+              type: "string",
+              description:
+                "Unique identifier for the field (e.g., 'email', 'birthdate'). This will be the key in the JSON response. Use descriptive camelCase or snake_case names.",
+            },
+            type: {
+              type: "string",
+              enum: [
+                "text",
+                "textarea",
+                "radio",
+                "dropdown",
+                "checkbox",
+                "date",
+                "time",
+                "number",
+              ],
+              description:
+                "Field type: 'text' for short text, 'textarea' for long text, 'radio' for 2-6 choices, 'dropdown' for many choices, 'checkbox' for multiple selections, 'date' for date picker, 'time' for time picker, 'number' for numeric input",
+            },
+            label: {
+              type: "string",
+              description: "Field label shown to the user",
+            },
+            description: {
+              type: "string",
+              description: "Optional help text explaining the field",
+            },
+            required: {
+              type: "boolean",
+              description: "Whether the field is required (default: false)",
+            },
+            placeholder: {
+              type: "string",
+              description: "Placeholder text for text/textarea fields",
+            },
+            validation: {
+              type: "string",
+              description:
+                "For text fields: 'email', 'url', 'phone', or a regex pattern",
+            },
+            minLength: {
+              type: "number",
+              description: "Minimum character length for textarea fields",
+            },
+            maxLength: {
+              type: "number",
+              description: "Maximum character length for textarea fields",
+            },
+            rows: {
+              type: "number",
+              description: "Number of visible rows for textarea (default: 4)",
+            },
+            choices: {
+              type: "array",
+              items: { type: "string" },
+              description:
+                "Array of choices for radio/dropdown/checkbox fields. Radio should have 2-6 choices, dropdown for 7+ choices.",
+            },
+            searchable: {
+              type: "boolean",
+              description: "Make dropdown searchable (for large lists)",
+            },
+            minSelections: {
+              type: "number",
+              description: "Minimum number of selections for checkbox fields",
+            },
+            maxSelections: {
+              type: "number",
+              description: "Maximum number of selections for checkbox fields",
+            },
+            minDate: {
+              type: "string",
+              description: "Minimum date (ISO format: YYYY-MM-DD)",
+            },
+            maxDate: {
+              type: "string",
+              description: "Maximum date (ISO format: YYYY-MM-DD)",
+            },
+            format: {
+              type: "string",
+              description: "Format for time fields: '12hr' or '24hr'",
+            },
+            min: {
+              type: "number",
+              description: "Minimum value for number fields",
+            },
+            max: {
+              type: "number",
+              description: "Maximum value for number fields",
+            },
+            step: {
+              type: "number",
+              description: "Step increment for number fields",
+            },
+            defaultValue: {
+              description:
+                "Optional default/pre-filled value for the field. Type varies by field: string for text/textarea/radio/dropdown/date/time, number for number fields, array of strings for checkbox fields. For radio/dropdown, must be one of the choices. For checkbox, must be a subset of choices.",
+            },
+          },
+          required: ["id", "type", "label"],
+        },
+        minItems: 1,
+      },
+    },
+    required: ["fields"],
+  },
+};
+
+// ============================================================================
+// Sample Data
+// ============================================================================
+
+export const SAMPLES: ToolSample[] = [
+  {
+    name: "Contact Form",
+    args: {
+      title: "Contact Us",
+      description: "Please fill out the form below to get in touch.",
+      fields: [
+        {
+          id: "name",
+          type: "text",
+          label: "Full Name",
+          required: true,
+          placeholder: "John Doe",
+        },
+        {
+          id: "email",
+          type: "text",
+          label: "Email Address",
+          required: true,
+          placeholder: "john@example.com",
+          validation: "email",
+        },
+        {
+          id: "subject",
+          type: "dropdown",
+          label: "Subject",
+          choices: [
+            "General Inquiry",
+            "Technical Support",
+            "Sales",
+            "Feedback",
+          ],
+          required: true,
+        },
+        {
+          id: "message",
+          type: "textarea",
+          label: "Message",
+          required: true,
+          minLength: 10,
+          maxLength: 500,
+          rows: 5,
+        },
+      ],
+    },
+  },
+  {
+    name: "Survey Form",
+    args: {
+      title: "Customer Satisfaction Survey",
+      fields: [
+        {
+          id: "satisfaction",
+          type: "radio",
+          label: "How satisfied are you with our service?",
+          choices: [
+            "Very Satisfied",
+            "Satisfied",
+            "Neutral",
+            "Dissatisfied",
+            "Very Dissatisfied",
+          ],
+          required: true,
+        },
+        {
+          id: "features",
+          type: "checkbox",
+          label: "Which features do you use most?",
+          choices: [
+            "Dashboard",
+            "Reports",
+            "Analytics",
+            "API",
+            "Integrations",
+          ],
+          minSelections: 1,
+          maxSelections: 3,
+        },
+        {
+          id: "recommendation",
+          type: "number",
+          label: "How likely are you to recommend us? (0-10)",
+          min: 0,
+          max: 10,
+          step: 1,
+        },
+      ],
+    },
+  },
+  {
+    name: "Event Registration",
+    args: {
+      title: "Event Registration",
+      description: "Register for our upcoming conference.",
+      fields: [
+        {
+          id: "attendeeName",
+          type: "text",
+          label: "Attendee Name",
+          required: true,
+        },
+        {
+          id: "eventDate",
+          type: "date",
+          label: "Preferred Date",
+          required: true,
+          minDate: "2025-01-01",
+          maxDate: "2025-12-31",
+        },
+        {
+          id: "sessionTime",
+          type: "time",
+          label: "Session Time",
+          format: "12hr",
+        },
+        {
+          id: "dietaryRestrictions",
+          type: "checkbox",
+          label: "Dietary Restrictions",
+          choices: ["Vegetarian", "Vegan", "Gluten-Free", "Halal", "Kosher"],
+        },
+      ],
+    },
+  },
+];
+
+// ============================================================================
+// Execute Function
+// ============================================================================
+
+export const executeForm = async (
   _context: ToolContext,
   args: FormArgs,
 ): Promise<ToolResult<never, FormData>> => {
@@ -298,18 +564,13 @@ const presentForm = async (
 };
 
 // ============================================================================
-// Export
+// Core Plugin (without UI components)
 // ============================================================================
 
-/**
- * Form plugin instance
- */
-export const plugin: ToolPlugin<never, FormData, FormArgs> = {
+export const pluginCore: ToolPluginCore<never, FormData, FormArgs> = {
   toolDefinition: TOOL_DEFINITION,
-  execute: presentForm,
+  execute: executeForm,
   generatingMessage: "Preparing form...",
   isEnabled: () => true,
-  viewComponent: View,
-  previewComponent: Preview,
   samples: SAMPLES,
 };

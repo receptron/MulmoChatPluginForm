@@ -1,12 +1,21 @@
 /**
- * MulmoChat Plugin
+ * MulmoChat Form Plugin
  *
- * See package.json for plugin details.
+ * Default export is the framework-agnostic core.
+ * For Vue implementation, import from "@mulmochat-plugin/form/vue"
+ *
+ * @example Default (Core - framework-agnostic)
+ * ```typescript
+ * import { pluginCore, TOOL_NAME, FormData } from "@mulmochat-plugin/form";
+ * ```
+ *
+ * @example Vue implementation
+ * ```typescript
+ * import FormPlugin from "@mulmochat-plugin/form/vue";
+ * import "@mulmochat-plugin/form/style.css";
+ * ```
  */
 
-import "./style.css";
-
-import { plugin } from "./plugin";
-import type { ToolPlugin } from "./common";
-
-export default { plugin: plugin as ToolPlugin };
+// Default export is core (framework-agnostic)
+export * from "./core";
+export { pluginCore as default } from "./core";

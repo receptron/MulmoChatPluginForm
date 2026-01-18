@@ -365,7 +365,7 @@
 
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
-import type { ToolResult } from "../common";
+import type { ToolResult } from "./types";
 import type {
   FormData,
   FormField,
