@@ -7,6 +7,7 @@
 
 export type {
   ToolContext,
+  ToolContextApp,
   ToolResult,
   ToolPlugin,
   ToolDefinition,

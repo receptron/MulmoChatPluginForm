@@ -8,15 +8,35 @@
 import type { Component } from "vue";
 
 /**
+ * Backend types that plugins can declare they use.
+ * App layer manages actual provider/model settings for each type.
+ */
+export type BackendType =
+  | "textLLM"
+  | "imageGen"
+  | "audio"
+  | "search"
+  | "browse"
+  | "map"
+  | "mulmocast";
+
+/**
+ * App interface provided to plugins via context.app
+ * Contains backend functions and config accessors
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface ToolContextApp extends Record<string, (...args: any[]) => any> {
+  // Config accessors
+  getConfig: <T = unknown>(key: string) => T | undefined;
+  setConfig: (key: string, value: unknown) => void; // Only works for authorized plugins
+}
+
+/**
  * Context passed to plugin execute function
  */
 export interface ToolContext {
   currentResult?: ToolResult<unknown> | null;
-  userPreferences?: Record<string, unknown>;
-  getPluginConfig?: <T = unknown>(key: string) => T | undefined;
-  /** Backend API functions provided by the host app */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  app?: Record<string, (...args: any[]) => any>;
+  app?: ToolContextApp;
 }
 
 /**
@@ -158,4 +178,7 @@ export interface ToolPlugin<
 
   /** Optional sample arguments for testing */
   samples?: ToolSample[];
+
+  /** Backend types this plugin uses (e.g., ["textLLM", "imageGen"]) */
+  backends?: BackendType[];
 }
