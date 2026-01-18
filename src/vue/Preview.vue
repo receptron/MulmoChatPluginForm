@@ -59,8 +59,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { ToolResult } from "../common";
-import type { FormData } from "./types";
+import type { ToolResult, FormData } from "./types";
 
 interface FormViewState {
   userResponses: Record<string, unknown>;
