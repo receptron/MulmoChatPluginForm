@@ -1,4 +1,6 @@
-# MulmoChat Plugin
+# @mulmochat-plugin/form
+
+[![npm version](https://badge.fury.io/js/%40mulmochat-plugin%2Fform.svg)](https://www.npmjs.com/package/@mulmochat-plugin/form)
 
 A plugin for [MulmoChat](https://github.com/receptron/MulmoChat) - a multi-modal voice chat application with OpenAI's GPT-4 Realtime API.
 
@@ -43,6 +45,14 @@ yarn typecheck
 # Lint
 yarn lint
 ```
+
+## Test Prompts
+
+Try these prompts to test the plugin:
+
+1. "Create a contact form with name, email, and message fields"
+2. "Make a survey form about user preferences"
+3. "Generate a registration form with username and password"
 
 ## License
 
