@@ -365,7 +365,7 @@
 
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
-import type { ToolResult } from "./types";
+import type { ToolResult } from "gui-chat-protocol";
 import type {
   FormData,
   FormField,
@@ -374,7 +374,7 @@ import type {
   NumberField,
   DateField,
   CheckboxField,
-} from "./types";
+} from "../core/types";
 
 interface FieldError {
   fieldId: string;

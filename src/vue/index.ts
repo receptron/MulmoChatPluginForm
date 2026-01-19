@@ -8,7 +8,8 @@
 // Import styles for Vue components
 import "../style.css";
 
-import type { ToolPlugin, FormData, FormArgs } from "./types";
+import type { ToolPlugin } from "gui-chat-protocol/vue";
+import type { FormData, FormArgs } from "../core/types";
 import { pluginCore } from "../core/plugin";
 import View from "./View.vue";
 import Preview from "./Preview.vue";
@@ -26,28 +27,8 @@ export const plugin: ToolPlugin<never, FormData, FormArgs> = {
   previewComponent: Preview,
 };
 
-// Re-export types
-export type { ToolPlugin, ToolPluginConfig } from "./types";
-
-// Re-export core types for convenience
+// Form-specific types
 export type {
-  BackendType,
-  ToolContextApp,
-  ToolContext,
-  ToolResult,
-  ToolResultComplete,
-  JsonSchemaProperty,
-  ToolDefinition,
-  StartApiResponse,
-  ToolSample,
-  InputHandler,
-  FileUploadConfig,
-  ConfigValue,
-  ConfigFieldSchema,
-  PluginConfigSchema,
-  ViewComponentProps,
-  PreviewComponentProps,
-  ToolPluginCore,
   FieldType,
   BaseField,
   TextField,
@@ -61,9 +42,9 @@ export type {
   FormField,
   FormData,
   FormArgs,
-} from "./types";
+} from "../core/types";
 
-// Re-export core plugin utilities
+// Core plugin utilities
 export {
   TOOL_NAME,
   TOOL_DEFINITION,

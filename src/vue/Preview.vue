@@ -59,7 +59,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { ToolResult, FormData } from "./types";
+import type { ToolResult } from "gui-chat-protocol";
+import type { FormData } from "../core/types";
 
 interface FormViewState {
   userResponses: Record<string, unknown>;
