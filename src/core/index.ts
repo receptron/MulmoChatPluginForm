@@ -5,29 +5,8 @@
  * Import from "@mulmochat-plugin/form" or "@mulmochat-plugin/form/core"
  */
 
-// Export all types
+// Form-specific types
 export type {
-  BackendType,
-  ToolContextApp,
-  ToolContext,
-  ToolResult,
-  ToolResultComplete,
-  JsonSchemaProperty,
-  ToolDefinition,
-  StartApiResponse,
-  ToolSample,
-  InputHandler,
-  FileInputHandler,
-  ClipboardImageInputHandler,
-  UrlInputHandler,
-  TextInputHandler,
-  FileUploadConfig,
-  ConfigValue,
-  ConfigFieldSchema,
-  PluginConfigSchema,
-  ViewComponentProps,
-  PreviewComponentProps,
-  ToolPluginCore,
   FieldType,
   BaseField,
   TextField,
@@ -43,7 +22,7 @@ export type {
   FormArgs,
 } from "./types";
 
-// Export plugin utilities
+// Core plugin utilities
 export {
   TOOL_NAME,
   TOOL_DEFINITION,

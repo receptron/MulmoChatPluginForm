@@ -5,14 +5,8 @@
  * Can be used by any framework (Vue, React, etc.)
  */
 
-import type {
-  ToolPluginCore,
-  ToolContext,
-  ToolResult,
-  FormData,
-  FormArgs,
-  FormField,
-} from "./types";
+import type { ToolPluginCore, ToolContext, ToolResult } from "gui-chat-protocol";
+import type { FormData, FormArgs, FormField } from "./types";
 import { TOOL_DEFINITION } from "./definition";
 import { SAMPLES } from "./samples";
 
