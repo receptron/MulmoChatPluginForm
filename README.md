@@ -11,8 +11,11 @@ Creates structured forms to collect user information with various field types.
 ## Installation
 
 ```bash
-yarn add @mulmochat-plugin/form
+yarn add @mulmochat-plugin/form gui-chat-protocol
 ```
+
+> `gui-chat-protocol` is a peer dependency — install it alongside the plugin; the host application provides the runtime and this plugin only declares the compatible range.
+
 
 ## Usage
 

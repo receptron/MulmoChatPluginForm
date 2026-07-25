@@ -34,9 +34,7 @@
     "lint": "eslint src demo"
   },
   "peerDependencies": {
-    "vue": "^3.5.0"
-  },
-  "dependencies": {
+    "vue": "^3.5.0",
     "gui-chat-protocol": "^1.2.0"
   },
   "devDependencies": {
@@ -53,7 +51,8 @@
     "vite": "^8.1.5",
     "vue": "^3.5.40",
     "vue-eslint-parser": "^10.4.1",
-    "vue-tsc": "^3.3.8"
+    "vue-tsc": "^3.3.8",
+    "gui-chat-protocol": "^1.2.0"
   },
   "keywords": [
     "mulmochat",
