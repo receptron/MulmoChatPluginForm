@@ -139,6 +139,16 @@ export const executeForm = async (
             `Field '${field.id}': maxSelections cannot exceed number of choices`,
           );
         }
+        // Without this the form renders and can never be submitted: the user is
+        // asked for more selections than there are boxes to tick.
+        if (
+          field.minSelections !== undefined &&
+          field.minSelections > field.choices.length
+        ) {
+          throw new Error(
+            `Field '${field.id}': minSelections cannot exceed number of choices`,
+          );
+        }
       }
 
       // Validate defaultValue
