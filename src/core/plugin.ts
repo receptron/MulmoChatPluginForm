@@ -18,6 +18,34 @@ export { SAMPLES } from "./samples";
 // Execute Function
 // ============================================================================
 
+/** A date the `date` input can hold: `YYYY-MM-DD`, and a day that exists. A
+ *  string the input cannot parse is blanked by the browser, so the form opens
+ *  empty while the definition still claims a default. */
+function requireIsoDate(id: string, field: string, value: string): void {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) {
+    throw new Error(`Field '${id}': ${field} must be a date in YYYY-MM-DD form`);
+  }
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  const real =
+    date.getUTCFullYear() === year &&
+    date.getUTCMonth() === month - 1 &&
+    date.getUTCDate() === day;
+  if (!real) {
+    throw new Error(`Field '${id}': ${field} '${value}' is not a real date`);
+  }
+}
+
+/** A time the `time` input can hold: `HH:MM`, optionally with seconds. */
+function requireTimeOfDay(id: string, value: string): void {
+  if (!/^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/.test(value)) {
+    throw new Error(`Field '${id}': defaultValue must be a time in HH:MM form`);
+  }
+}
+
 export const executeForm = async (
   _context: ToolContext,
   args: FormArgs,
@@ -98,6 +126,13 @@ export const executeForm = async (
           break;
 
         case "date":
+          // A bound that is not a real date is a window nothing can satisfy.
+          if (field.minDate !== undefined) {
+            requireIsoDate(field.id, "minDate", field.minDate);
+          }
+          if (field.maxDate !== undefined) {
+            requireIsoDate(field.id, "maxDate", field.maxDate);
+          }
           if (field.minDate && field.maxDate) {
             if (field.minDate > field.maxDate) {
               throw new Error(
@@ -199,6 +234,15 @@ export const executeForm = async (
                 `Field '${field.id}': defaultValue must be an array`,
               );
             }
+            // The view ticks a box by index, so a repeat shows as one tick while
+            // the count rules see two and the submission emits it twice.
+            if (
+              new Set(field.defaultValue).size !== field.defaultValue.length
+            ) {
+              throw new Error(
+                `Field '${field.id}': defaultValue must not repeat a selection`,
+              );
+            }
             for (const value of field.defaultValue) {
               if (!field.choices.includes(value)) {
                 throw new Error(
@@ -248,6 +292,7 @@ export const executeForm = async (
                 `Field '${field.id}': defaultValue must be a string (ISO date format)`,
               );
             }
+            requireIsoDate(field.id, "defaultValue", field.defaultValue);
             if (
               field.minDate !== undefined &&
               field.defaultValue < field.minDate
@@ -272,6 +317,7 @@ export const executeForm = async (
                 `Field '${field.id}': defaultValue must be a string`,
               );
             }
+            requireTimeOfDay(field.id, field.defaultValue);
             break;
         }
       }

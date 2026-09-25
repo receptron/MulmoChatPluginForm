@@ -139,3 +139,40 @@ describe("executeForm — defaultValue", () => {
     );
   });
 });
+
+// The browser blanks a value its input cannot parse, so a form with an
+// unparseable default opens empty while the definition still claims one.
+describe("executeForm — a date or time the input cannot hold", () => {
+  it("accepts a real date and a well-formed time", async () => {
+    assert.ok(await accepts([{ id: "a", type: "date", label: "A", defaultValue: "2026-02-28" }]), "refused a real date");
+    assert.ok(await accepts([{ id: "b", type: "time", label: "B", defaultValue: "23:59" }]), "refused a valid time");
+    assert.ok(await accepts([{ id: "c", type: "time", label: "C", defaultValue: "08:05:30" }]), "refused a valid time with seconds");
+  });
+
+  it("refuses a date that is not YYYY-MM-DD, and a day that does not exist", async () => {
+    assert.match(await messageFor([{ id: "a", type: "date", label: "A", defaultValue: "06/06/2026" }]), /must be a date in YYYY-MM-DD form/);
+    assert.match(await messageFor([{ id: "a", type: "date", label: "A", defaultValue: "2026-02-30" }]), /is not a real date/);
+  });
+
+  it("refuses a bound that is not a real date either", async () => {
+    assert.match(await messageFor([{ id: "a", type: "date", label: "A", minDate: "2026-02-30" }]), /minDate '2026-02-30' is not a real date/);
+    assert.match(await messageFor([{ id: "a", type: "date", label: "A", maxDate: "tomorrow" }]), /maxDate must be a date in YYYY-MM-DD form/);
+  });
+
+  it("refuses a time outside the clock", async () => {
+    assert.match(await messageFor([{ id: "a", type: "time", label: "A", defaultValue: "25:90" }]), /must be a time in HH:MM form/);
+    assert.match(await messageFor([{ id: "a", type: "time", label: "A", defaultValue: "9:30" }]), /must be a time in HH:MM form/);
+  });
+});
+
+// The view ticks by index, so a repeat is one tick, two against the count rules,
+// and two entries in what is submitted.
+describe("executeForm — a repeated checkbox default", () => {
+  it("accepts distinct selections", async () => {
+    assert.ok(await accepts([{ id: "a", type: "checkbox", label: "A", choices: ["x", "y"], defaultValue: ["x", "y"] }]), "refused distinct selections");
+  });
+
+  it("refuses a repeat", async () => {
+    assert.match(await messageFor([{ id: "a", type: "checkbox", label: "A", choices: ["x", "y"], defaultValue: ["x", "x"] }]), /must not repeat a selection/);
+  });
+});
