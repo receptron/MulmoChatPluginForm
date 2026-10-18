@@ -1,0 +1,921 @@
+{
+  "report": {
+    "schemaVersion": 1,
+    "root": ".",
+    "label": "@mulmochat-plugin/form",
+    "profile": "library",
+    "stacks": [
+      "vue",
+      "ts"
+    ],
+    "complete": true,
+    "size": {
+      "files": 15,
+      "sloc": 1767,
+      "testSloc": 154
+    },
+    "dimensions": [
+      {
+        "dimension": "architecture",
+        "status": "experimental",
+        "score": 94.4417,
+        "coverage": 1,
+        "metrics": [
+          {
+            "metric": "knip.unused_export_ratio",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 0.2
+            },
+            "weight": 0.3,
+            "points": 30
+          },
+          {
+            "metric": "knip.unused_file_ratio",
+            "value": 0.0667,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 0.3
+            },
+            "weight": 0.25,
+            "points": 19.4417
+          },
+          {
+            "metric": "knip.unused_dependencies",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 10
+            },
+            "weight": 0.2,
+            "points": 20
+          },
+          {
+            "metric": "circular.cycle_count",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 8
+            },
+            "weight": 0.25,
+            "points": 25
+          }
+        ],
+        "confidence": "low",
+        "confidenceReason": "10 suppressions in scope"
+      },
+      {
+        "dimension": "correctness",
+        "status": "experimental",
+        "score": 97.1705,
+        "coverage": 1,
+        "metrics": [
+          {
+            "metric": "oxlint.errors_per_kloc",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 3
+            },
+            "weight": 0.6,
+            "density": true,
+            "points": 60
+          },
+          {
+            "metric": "oxlint.violations_per_kloc",
+            "value": 0.5659,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 8
+            },
+            "weight": 0.4,
+            "density": true,
+            "points": 37.1705,
+            "topContributors": [
+              {
+                "file": "src/vue/View.vue",
+                "value": 1
+              }
+            ]
+          }
+        ],
+        "confidence": "low",
+        "confidenceReason": "10 suppressions in scope"
+      },
+      {
+        "dimension": "documentation",
+        "status": "experimental",
+        "score": 100.0001,
+        "coverage": 0.75,
+        "metrics": [
+          {
+            "metric": "readme-contract.has_readme",
+            "value": 1,
+            "state": "ok",
+            "scale": {
+              "good": 1,
+              "bad": 0
+            },
+            "weight": 0.35,
+            "points": 46.6667
+          },
+          {
+            "metric": "readme-contract.readme_words",
+            "value": 179,
+            "state": "ok",
+            "scale": {
+              "good": 120,
+              "bad": 30
+            },
+            "weight": 0.2,
+            "points": 26.6667
+          },
+          {
+            "metric": "readme-contract.documented_flag_ratio",
+            "value": 0,
+            "state": "skipped",
+            "scale": {
+              "good": 1,
+              "bad": 0.5
+            },
+            "weight": 0.25,
+            "points": 0
+          },
+          {
+            "metric": "comment-quality.marker_per_kloc",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 2
+            },
+            "weight": 0.2,
+            "density": true,
+            "points": 26.6667,
+            "topContributors": []
+          }
+        ],
+        "confidence": "low",
+        "confidenceReason": "10 suppressions in scope"
+      },
+      {
+        "dimension": "integrity",
+        "status": "experimental",
+        "score": 47.3208,
+        "coverage": 1,
+        "metrics": [
+          {
+            "metric": "suppression-scan.source_per_kloc",
+            "value": 5.6593,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 5
+            },
+            "weight": 0.3,
+            "density": true,
+            "points": 0,
+            "topContributors": [
+              {
+                "file": "src/vue/View.vue",
+                "value": 8
+              },
+              {
+                "file": "demo/App.vue",
+                "value": 1
+              },
+              {
+                "file": "src/vue/Preview.vue",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "metric": "suppression-scan.unreasoned_ratio",
+            "value": 0.9,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 1
+            },
+            "weight": 0.2,
+            "points": 2
+          },
+          {
+            "metric": "suppression-scan.test_count",
+            "value": 1,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 200
+            },
+            "weight": 0.1,
+            "points": 9.95
+          },
+          {
+            "metric": "config-integrity.gap_ratio",
+            "value": 0.1111,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 0.6
+            },
+            "weight": 0.25,
+            "points": 20.3708
+          },
+          {
+            "metric": "ci-integrity.gap_ratio",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 0.6
+            },
+            "weight": 0.15,
+            "points": 15
+          }
+        ],
+        "confidence": "high",
+        "confidenceReason": "no suppression signal wired"
+      },
+      {
+        "dimension": "readability",
+        "status": "experimental",
+        "score": 65.347,
+        "coverage": 1,
+        "metrics": [
+          {
+            "metric": "file-shape.sloc_p95",
+            "value": 736,
+            "state": "ok",
+            "scale": {
+              "good": 150,
+              "bad": 800
+            },
+            "weight": 0.3,
+            "points": 2.9538,
+            "topContributors": [
+              {
+                "file": "src/vue/View.vue",
+                "value": 736
+              },
+              {
+                "file": "src/core/plugin.ts",
+                "value": 333
+              },
+              {
+                "file": "src/core/definition.ts",
+                "value": 136
+              },
+              {
+                "file": "src/core/samples.ts",
+                "value": 129
+              },
+              {
+                "file": "demo/App.vue",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "metric": "file-shape.max_file_sloc",
+            "value": 736,
+            "state": "ok",
+            "scale": {
+              "good": 300,
+              "bad": 2000
+            },
+            "weight": 0.2,
+            "points": 14.8706
+          },
+          {
+            "metric": "file-shape.god_file_count",
+            "value": 1,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 20
+            },
+            "weight": 0.15,
+            "points": 14.25
+          },
+          {
+            "metric": "jscpd.duplicated_lines_pct",
+            "value": 0.51,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 10
+            },
+            "weight": 0.2,
+            "points": 18.98,
+            "topContributors": [
+              {
+                "file": "src/vue/View.vue",
+                "value": 12
+              }
+            ]
+          },
+          {
+            "metric": "oxlint.violations_per_kloc",
+            "value": 0.5659,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 12
+            },
+            "weight": 0.15,
+            "density": true,
+            "points": 14.2926,
+            "topContributors": [
+              {
+                "file": "src/vue/View.vue",
+                "value": 1
+              }
+            ]
+          }
+        ],
+        "confidence": "low",
+        "confidenceReason": "10 suppressions in scope"
+      },
+      {
+        "dimension": "security",
+        "status": "experimental",
+        "score": 93,
+        "coverage": 1,
+        "metrics": [
+          {
+            "metric": "audit.critical",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 1
+            },
+            "weight": 0.4,
+            "points": 40
+          },
+          {
+            "metric": "audit.high",
+            "value": 1,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 5
+            },
+            "weight": 0.35,
+            "points": 28
+          },
+          {
+            "metric": "audit.moderate",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 20
+            },
+            "weight": 0.25,
+            "points": 25
+          }
+        ],
+        "confidence": "high",
+        "confidenceReason": "no suppression signal wired"
+      },
+      {
+        "dimension": "test-coverage",
+        "status": "experimental",
+        "score": 27.48,
+        "coverage": 1,
+        "metrics": [
+          {
+            "metric": "test-presence.test_to_source_ratio",
+            "value": 0.0872,
+            "state": "ok",
+            "scale": {
+              "good": 0.5,
+              "bad": 0.05
+            },
+            "weight": 0.3,
+            "points": 2.48
+          },
+          {
+            "metric": "coverage.line_pct",
+            "value": 34.71,
+            "state": "ok",
+            "scale": {
+              "good": 90,
+              "bad": 40
+            },
+            "weight": 0.3,
+            "points": 0
+          },
+          {
+            "metric": "coverage.branch_pct",
+            "value": 90.98,
+            "state": "ok",
+            "scale": {
+              "good": 85,
+              "bad": 30
+            },
+            "weight": 0.25,
+            "points": 25
+          },
+          {
+            "metric": "coverage.function_pct",
+            "value": 33.33,
+            "state": "ok",
+            "scale": {
+              "good": 90,
+              "bad": 40
+            },
+            "weight": 0.15,
+            "points": 0
+          }
+        ],
+        "confidence": "low",
+        "confidenceReason": "10 suppressions in scope"
+      },
+      {
+        "dimension": "type-safety",
+        "status": "experimental",
+        "score": 100,
+        "coverage": 1,
+        "metrics": [
+          {
+            "metric": "source-mix.untyped_sloc_ratio",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 0.5
+            },
+            "weight": 0.3,
+            "points": 30
+          },
+          {
+            "metric": "source-mix.untyped_file_ratio",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 0.5
+            },
+            "weight": 0.2,
+            "points": 20,
+            "topContributors": []
+          },
+          {
+            "metric": "tsc.type_errors_per_kloc",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 2
+            },
+            "weight": 0.5,
+            "density": true,
+            "points": 50
+          }
+        ],
+        "confidence": "low",
+        "confidenceReason": "10 suppressions in scope"
+      },
+      {
+        "dimension": "ui-consistency",
+        "status": "experimental",
+        "score": 86.7892,
+        "coverage": 1,
+        "metrics": [
+          {
+            "metric": "ui-token.color_cardinality",
+            "value": 0,
+            "state": "ok",
+            "scale": {
+              "good": 20,
+              "bad": 120
+            },
+            "weight": 0.3,
+            "points": 30,
+            "topContributors": [
+              {
+                "file": "demo/App.vue",
+                "value": 0
+              },
+              {
+                "file": "src/vue/Preview.vue",
+                "value": 0
+              },
+              {
+                "file": "src/vue/View.vue",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "metric": "ui-token.spacing_cardinality",
+            "value": 3,
+            "state": "ok",
+            "scale": {
+              "good": 10,
+              "bad": 60
+            },
+            "weight": 0.3,
+            "points": 30,
+            "topContributors": [
+              {
+                "file": "demo/App.vue",
+                "value": 2
+              },
+              {
+                "file": "src/vue/View.vue",
+                "value": 1
+              },
+              {
+                "file": "src/vue/Preview.vue",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "metric": "ui-token.inline_style_per_kloc",
+            "value": 1.0504,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 10
+            },
+            "weight": 0.2,
+            "density": true,
+            "points": 17.8992
+          },
+          {
+            "metric": "ui-token.style_block_ratio",
+            "value": 0.3333,
+            "state": "ok",
+            "scale": {
+              "good": 0,
+              "bad": 0.6
+            },
+            "weight": 0.2,
+            "points": 8.89
+          }
+        ],
+        "confidence": "low",
+        "confidenceReason": "10 suppressions in scope"
+      }
+    ],
+    "metrics": {
+      "suppression-scan.source_count": 10,
+      "suppression-scan.test_count": 1,
+      "suppression-scan.source_per_kloc": 5.6593,
+      "suppression-scan.unreasoned_source_count": 9,
+      "suppression-scan.unreasoned_ratio": 0.9,
+      "file-shape.sloc_p95": 736,
+      "file-shape.max_file_sloc": 736,
+      "file-shape.god_file_count": 1,
+      "file-shape.source_file_count": 11,
+      "file-shape.source_sloc": 1767,
+      "source-mix.untyped_file_ratio": 0,
+      "source-mix.untyped_sloc_ratio": 0,
+      "source-mix.untyped_file_count": 0,
+      "source-mix.typed_file_count": 11,
+      "config-integrity.gap_ratio": 0.1111,
+      "config-integrity.gap_count": 1,
+      "ci-integrity.gap_ratio": 0,
+      "ci-integrity.gap_count": 0,
+      "ci-integrity.workflow_count": 2,
+      "oxlint.violations_per_kloc": 0.5659,
+      "oxlint.violations": 1,
+      "oxlint.errors_per_kloc": 0,
+      "jscpd.duplicated_lines_pct": 0.51,
+      "jscpd.clone_count": 1,
+      "tsc.type_errors": 0,
+      "tsc.type_errors_per_kloc": 0,
+      "knip.unused_files": 1,
+      "knip.unused_file_ratio": 0.0667,
+      "knip.unused_export_ratio": 0,
+      "knip.unused_exports": 0,
+      "knip.unused_dependencies": 0,
+      "audit.critical": 0,
+      "audit.high": 1,
+      "audit.moderate": 0,
+      "audit.low": 0,
+      "test-presence.test_to_source_ratio": 0.0872,
+      "test-presence.test_sloc": 154,
+      "test-presence.test_file_count": 1,
+      "coverage.line_pct": 34.71,
+      "coverage.branch_pct": 90.98,
+      "coverage.function_pct": 33.33,
+      "circular.cycle_count": 0,
+      "readme-contract.has_readme": 1,
+      "readme-contract.readme_words": 179,
+      "comment-quality.marker_per_kloc": 0,
+      "comment-quality.marker_count": 0,
+      "comment-quality.comment_density": 0.1172,
+      "ui-token.color_cardinality": 0,
+      "ui-token.spacing_cardinality": 3,
+      "ui-token.inline_style_per_kloc": 1.0504,
+      "ui-token.style_block_ratio": 0.3333,
+      "ui-token.ui_file_count": 3
+    },
+    "findings": [
+      {
+        "rule": "as-any-no-reason",
+        "severity": "error",
+        "file": "src/vue/Preview.vue",
+        "line": 83,
+        "message": "bypasses the type checker, with no reason given",
+        "probe": "suppression-scan",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "as-any-no-reason",
+        "severity": "error",
+        "file": "src/vue/View.vue",
+        "line": 434,
+        "message": "bypasses the type checker, with no reason given",
+        "probe": "suppression-scan",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "eslint-disable-no-reason",
+        "severity": "error",
+        "file": "src/vue/View.vue",
+        "line": 386,
+        "message": "suppresses an ESLint rule, with no reason given",
+        "probe": "suppression-scan",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "eslint-disable-no-reason",
+        "severity": "error",
+        "file": "src/vue/View.vue",
+        "line": 402,
+        "message": "suppresses an ESLint rule, with no reason given",
+        "probe": "suppression-scan",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "eslint-disable-no-reason",
+        "severity": "error",
+        "file": "src/vue/View.vue",
+        "line": 478,
+        "message": "suppresses an ESLint rule, with no reason given",
+        "probe": "suppression-scan",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "eslint-disable-no-reason",
+        "severity": "error",
+        "file": "src/vue/View.vue",
+        "line": 481,
+        "message": "suppresses an ESLint rule, with no reason given",
+        "probe": "suppression-scan",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "eslint-disable-no-reason",
+        "severity": "error",
+        "file": "src/vue/View.vue",
+        "line": 533,
+        "message": "suppresses an ESLint rule, with no reason given",
+        "probe": "suppression-scan",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "eslint-disable-no-reason",
+        "severity": "error",
+        "file": "src/vue/View.vue",
+        "line": 560,
+        "message": "suppresses an ESLint rule, with no reason given",
+        "probe": "suppression-scan",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "eslint-disable-no-reason",
+        "severity": "error",
+        "file": "src/vue/View.vue",
+        "line": 746,
+        "message": "suppresses an ESLint rule, with no reason given",
+        "probe": "suppression-scan",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "god-file",
+        "severity": "warning",
+        "file": "src/vue/View.vue",
+        "line": 1,
+        "message": "736 lines (limit 500)",
+        "probe": "file-shape",
+        "dimension": "readability",
+        "tier": 0
+      },
+      {
+        "rule": "formatter-missing",
+        "severity": "warning",
+        "file": "package.json",
+        "line": 1,
+        "message": "No formatter is installed",
+        "probe": "config-integrity",
+        "dimension": "integrity",
+        "tier": 0
+      },
+      {
+        "rule": "oxlint/no-new",
+        "severity": "warning",
+        "file": "src/vue/View.vue",
+        "line": 1,
+        "message": "Do not use 'new' for side effects.",
+        "probe": "oxlint",
+        "dimension": "correctness",
+        "tier": 0
+      },
+      {
+        "rule": "duplicated-block",
+        "severity": "warning",
+        "file": "src/vue/View.vue",
+        "line": 292,
+        "message": "12 duplicated lines",
+        "probe": "jscpd",
+        "dimension": "readability",
+        "tier": 0
+      },
+      {
+        "rule": "unused-file",
+        "severity": "warning",
+        "file": "tests/test_formValidation.ts",
+        "line": 1,
+        "message": "nothing imports this file",
+        "probe": "knip",
+        "dimension": "architecture",
+        "tier": 1
+      },
+      {
+        "rule": "style-block",
+        "severity": "warning",
+        "file": "src/vue/View.vue",
+        "line": 1,
+        "message": "a style block, where a utility class or a token would be shared",
+        "probe": "ui-token",
+        "dimension": "ui-consistency",
+        "tier": 0
+      }
+    ],
+    "probes": [
+      {
+        "probe": "suppression-scan",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      },
+      {
+        "probe": "file-shape",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      },
+      {
+        "probe": "source-mix",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      },
+      {
+        "probe": "config-integrity",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      },
+      {
+        "probe": "ci-integrity",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      },
+      {
+        "probe": "oxlint",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": [
+          "oxlint"
+        ]
+      },
+      {
+        "probe": "jscpd",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": [
+          "jscpd"
+        ]
+      },
+      {
+        "probe": "tsc",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": [
+          "vue-tsc"
+        ]
+      },
+      {
+        "probe": "knip",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": [
+          "knip"
+        ]
+      },
+      {
+        "probe": "audit",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": [
+          "yarn"
+        ]
+      },
+      {
+        "probe": "test-presence",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      },
+      {
+        "probe": "coverage",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      },
+      {
+        "probe": "circular",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": [
+          "madge"
+        ]
+      },
+      {
+        "probe": "readme-contract",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      },
+      {
+        "probe": "comment-quality",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      },
+      {
+        "probe": "ui-token",
+        "status": {
+          "kind": "ok"
+        },
+        "tools": []
+      }
+    ],
+    "toolVersions": {
+      "oxlint": "Version: 1.88.0",
+      "jscpd": "4.3.0",
+      "vue-tsc": "6.0.3",
+      "knip": "6.41.0",
+      "yarn": "1.22.22",
+      "madge": "8.0.0"
+    },
+    "overall": {
+      "score": 79.061,
+      "scoredDimensions": 9,
+      "comparable": false
+    }
+  },
+  "createdAt": "2026-10-18T04:15:24.394Z"
+}
