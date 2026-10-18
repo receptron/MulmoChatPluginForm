@@ -1,6 +1,6 @@
 {
   "name": "@mulmochat-plugin/form",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Form plugin for MulmoChat",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -39,7 +39,7 @@
     "format:check": "prettier --check \"{src,demo,tests}/**/*.{ts,tsx,vue,json,css}\" \"*.{ts,js,json}\""
   },
   "peerDependencies": {
-    "gui-chat-protocol": "^2.1.0",
+    "gui-chat-protocol": "^2.3.0",
     "vue": "^3.5.0"
   },
   "devDependencies": {
