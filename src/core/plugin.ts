@@ -30,10 +30,7 @@ function requireIsoDate(id: string, field: string, value: string): void {
   const month = Number(match[2]);
   const day = Number(match[3]);
   const date = new Date(Date.UTC(year, month - 1, day));
-  const real =
-    date.getUTCFullYear() === year &&
-    date.getUTCMonth() === month - 1 &&
-    date.getUTCDate() === day;
+  const real = date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
   if (!real) {
     throw new Error(`Field '${id}': ${field} '${value}' is not a real date`);
   }
@@ -46,10 +43,7 @@ function requireTimeOfDay(id: string, value: string): void {
   }
 }
 
-export const executeForm = async (
-  _context: ToolContext,
-  args: FormArgs,
-): Promise<ToolResult<never, FormData>> => {
+export const executeForm = async (_context: ToolContext, args: FormArgs): Promise<ToolResult<never, FormData>> => {
   try {
     const { title, description, fields } = args;
 
@@ -86,41 +80,31 @@ export const executeForm = async (
           // Valid text fields
           if (field.minLength !== undefined && field.maxLength !== undefined) {
             if (field.minLength > field.maxLength) {
-              throw new Error(
-                `Field '${field.id}': minLength cannot be greater than maxLength`,
-              );
+              throw new Error(`Field '${field.id}': minLength cannot be greater than maxLength`);
             }
           }
           break;
 
         case "radio":
           if (!Array.isArray(field.choices) || field.choices.length < 2) {
-            throw new Error(
-              `Field '${field.id}': radio fields must have at least 2 choices`,
-            );
+            throw new Error(`Field '${field.id}': radio fields must have at least 2 choices`);
           }
           if (field.choices.length > 6) {
-            console.warn(
-              `Field '${field.id}': radio fields with more than 6 choices should use 'dropdown' type instead`,
-            );
+            console.warn(`Field '${field.id}': radio fields with more than 6 choices should use 'dropdown' type instead`);
           }
           break;
 
         case "dropdown":
         case "checkbox":
           if (!Array.isArray(field.choices) || field.choices.length < 1) {
-            throw new Error(
-              `Field '${field.id}': ${field.type} fields must have at least 1 choice`,
-            );
+            throw new Error(`Field '${field.id}': ${field.type} fields must have at least 1 choice`);
           }
           break;
 
         case "number":
           if (field.min !== undefined && field.max !== undefined) {
             if (field.min > field.max) {
-              throw new Error(
-                `Field '${field.id}': min cannot be greater than max`,
-              );
+              throw new Error(`Field '${field.id}': min cannot be greater than max`);
             }
           }
           break;
@@ -135,9 +119,7 @@ export const executeForm = async (
           }
           if (field.minDate && field.maxDate) {
             if (field.minDate > field.maxDate) {
-              throw new Error(
-                `Field '${field.id}': minDate cannot be after maxDate`,
-              );
+              throw new Error(`Field '${field.id}': minDate cannot be after maxDate`);
             }
           }
           break;
@@ -148,41 +130,24 @@ export const executeForm = async (
 
         default: {
           const unknownField = field as FormField;
-          throw new Error(
-            `Field '${unknownField.id}': unknown field type '${unknownField.type}'`,
-          );
+          throw new Error(`Field '${unknownField.id}': unknown field type '${unknownField.type}'`);
         }
       }
 
       // Validate checkbox constraints
       if (field.type === "checkbox") {
-        if (
-          field.minSelections !== undefined &&
-          field.maxSelections !== undefined
-        ) {
+        if (field.minSelections !== undefined && field.maxSelections !== undefined) {
           if (field.minSelections > field.maxSelections) {
-            throw new Error(
-              `Field '${field.id}': minSelections cannot be greater than maxSelections`,
-            );
+            throw new Error(`Field '${field.id}': minSelections cannot be greater than maxSelections`);
           }
         }
-        if (
-          field.maxSelections !== undefined &&
-          field.maxSelections > field.choices.length
-        ) {
-          throw new Error(
-            `Field '${field.id}': maxSelections cannot exceed number of choices`,
-          );
+        if (field.maxSelections !== undefined && field.maxSelections > field.choices.length) {
+          throw new Error(`Field '${field.id}': maxSelections cannot exceed number of choices`);
         }
         // Without this the form renders and can never be submitted: the user is
         // asked for more selections than there are boxes to tick.
-        if (
-          field.minSelections !== undefined &&
-          field.minSelections > field.choices.length
-        ) {
-          throw new Error(
-            `Field '${field.id}': minSelections cannot exceed number of choices`,
-          );
+        if (field.minSelections !== undefined && field.minSelections > field.choices.length) {
+          throw new Error(`Field '${field.id}': minSelections cannot exceed number of choices`);
         }
       }
 
@@ -192,130 +157,76 @@ export const executeForm = async (
           case "text":
           case "textarea":
             if (typeof field.defaultValue !== "string") {
-              throw new Error(
-                `Field '${field.id}': defaultValue must be a string`,
-              );
+              throw new Error(`Field '${field.id}': defaultValue must be a string`);
             }
-            if (
-              field.minLength !== undefined &&
-              field.defaultValue.length < field.minLength
-            ) {
-              throw new Error(
-                `Field '${field.id}': defaultValue length is less than minLength`,
-              );
+            if (field.minLength !== undefined && field.defaultValue.length < field.minLength) {
+              throw new Error(`Field '${field.id}': defaultValue length is less than minLength`);
             }
-            if (
-              field.maxLength !== undefined &&
-              field.defaultValue.length > field.maxLength
-            ) {
-              throw new Error(
-                `Field '${field.id}': defaultValue length exceeds maxLength`,
-              );
+            if (field.maxLength !== undefined && field.defaultValue.length > field.maxLength) {
+              throw new Error(`Field '${field.id}': defaultValue length exceeds maxLength`);
             }
             break;
 
           case "radio":
           case "dropdown":
             if (typeof field.defaultValue !== "string") {
-              throw new Error(
-                `Field '${field.id}': defaultValue must be a string`,
-              );
+              throw new Error(`Field '${field.id}': defaultValue must be a string`);
             }
             if (!field.choices.includes(field.defaultValue)) {
-              throw new Error(
-                `Field '${field.id}': defaultValue '${field.defaultValue}' is not in choices`,
-              );
+              throw new Error(`Field '${field.id}': defaultValue '${field.defaultValue}' is not in choices`);
             }
             break;
 
           case "checkbox":
             if (!Array.isArray(field.defaultValue)) {
-              throw new Error(
-                `Field '${field.id}': defaultValue must be an array`,
-              );
+              throw new Error(`Field '${field.id}': defaultValue must be an array`);
             }
             // The view ticks a box by index, so a repeat shows as one tick while
             // the count rules see two and the submission emits it twice.
-            if (
-              new Set(field.defaultValue).size !== field.defaultValue.length
-            ) {
-              throw new Error(
-                `Field '${field.id}': defaultValue must not repeat a selection`,
-              );
+            if (new Set(field.defaultValue).size !== field.defaultValue.length) {
+              throw new Error(`Field '${field.id}': defaultValue must not repeat a selection`);
             }
             for (const value of field.defaultValue) {
               if (!field.choices.includes(value)) {
-                throw new Error(
-                  `Field '${field.id}': defaultValue contains '${value}' which is not in choices`,
-                );
+                throw new Error(`Field '${field.id}': defaultValue contains '${value}' which is not in choices`);
               }
             }
-            if (
-              field.minSelections !== undefined &&
-              field.defaultValue.length < field.minSelections
-            ) {
-              throw new Error(
-                `Field '${field.id}': defaultValue has fewer selections than minSelections`,
-              );
+            if (field.minSelections !== undefined && field.defaultValue.length < field.minSelections) {
+              throw new Error(`Field '${field.id}': defaultValue has fewer selections than minSelections`);
             }
-            if (
-              field.maxSelections !== undefined &&
-              field.defaultValue.length > field.maxSelections
-            ) {
-              throw new Error(
-                `Field '${field.id}': defaultValue has more selections than maxSelections`,
-              );
+            if (field.maxSelections !== undefined && field.defaultValue.length > field.maxSelections) {
+              throw new Error(`Field '${field.id}': defaultValue has more selections than maxSelections`);
             }
             break;
 
           case "number":
             if (typeof field.defaultValue !== "number") {
-              throw new Error(
-                `Field '${field.id}': defaultValue must be a number`,
-              );
+              throw new Error(`Field '${field.id}': defaultValue must be a number`);
             }
             if (field.min !== undefined && field.defaultValue < field.min) {
-              throw new Error(
-                `Field '${field.id}': defaultValue is less than min`,
-              );
+              throw new Error(`Field '${field.id}': defaultValue is less than min`);
             }
             if (field.max !== undefined && field.defaultValue > field.max) {
-              throw new Error(
-                `Field '${field.id}': defaultValue is greater than max`,
-              );
+              throw new Error(`Field '${field.id}': defaultValue is greater than max`);
             }
             break;
 
           case "date":
             if (typeof field.defaultValue !== "string") {
-              throw new Error(
-                `Field '${field.id}': defaultValue must be a string (ISO date format)`,
-              );
+              throw new Error(`Field '${field.id}': defaultValue must be a string (ISO date format)`);
             }
             requireIsoDate(field.id, "defaultValue", field.defaultValue);
-            if (
-              field.minDate !== undefined &&
-              field.defaultValue < field.minDate
-            ) {
-              throw new Error(
-                `Field '${field.id}': defaultValue is before minDate`,
-              );
+            if (field.minDate !== undefined && field.defaultValue < field.minDate) {
+              throw new Error(`Field '${field.id}': defaultValue is before minDate`);
             }
-            if (
-              field.maxDate !== undefined &&
-              field.defaultValue > field.maxDate
-            ) {
-              throw new Error(
-                `Field '${field.id}': defaultValue is after maxDate`,
-              );
+            if (field.maxDate !== undefined && field.defaultValue > field.maxDate) {
+              throw new Error(`Field '${field.id}': defaultValue is after maxDate`);
             }
             break;
 
           case "time":
             if (typeof field.defaultValue !== "string") {
-              throw new Error(
-                `Field '${field.id}': defaultValue must be a string`,
-              );
+              throw new Error(`Field '${field.id}': defaultValue must be a string`);
             }
             requireTimeOfDay(field.id, field.defaultValue);
             break;
@@ -343,8 +254,7 @@ export const executeForm = async (
     console.error("ERR: exception\n Form creation error", error);
     return {
       message: `Form error: ${error instanceof Error ? error.message : "Unknown error"}`,
-      instructions:
-        "Acknowledge that there was an error creating the form and suggest trying again with corrected field definitions.",
+      instructions: "Acknowledge that there was an error creating the form and suggest trying again with corrected field definitions.",
     };
   }
 };

@@ -2,34 +2,19 @@
   <div class="w-full h-full overflow-y-auto p-8">
     <div v-if="formData" class="max-w-3xl w-full mx-auto">
       <!-- Form Title -->
-      <h2
-        v-if="formData.title"
-        class="text-gray-900 text-3xl font-bold mb-4 text-center"
-      >
+      <h2 v-if="formData.title" class="text-gray-900 text-3xl font-bold mb-4 text-center">
         {{ formData.title }}
       </h2>
 
       <!-- Form Description -->
-      <p
-        v-if="formData.description"
-        class="text-gray-600 text-center mb-8 text-lg"
-      >
+      <p v-if="formData.description" class="text-gray-600 text-center mb-8 text-lg">
         {{ formData.description }}
       </p>
 
       <!-- Error Summary -->
-      <div
-        v-if="showErrorSummary && fieldErrors.size > 0"
-        class="bg-red-50 border-2 border-red-500 rounded-lg p-4 mb-6"
-        role="alert"
-      >
+      <div v-if="showErrorSummary && fieldErrors.size > 0" class="bg-red-50 border-2 border-red-500 rounded-lg p-4 mb-6" role="alert">
         <h3 class="text-red-800 font-semibold mb-2 flex items-center gap-2">
-          <svg
-            class="w-5 h-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            aria-hidden="true"
-          >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
             <path
               fill-rule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -40,11 +25,7 @@
         </h3>
         <ul class="text-red-700 space-y-1">
           <li v-for="[fieldId, error] in fieldErrors" :key="fieldId">
-            <a
-              :href="`#${fieldId}`"
-              @click.prevent="focusField(fieldId)"
-              class="hover:underline cursor-pointer"
-            >
+            <a :href="`#${fieldId}`" @click.prevent="focusField(fieldId)" class="hover:underline cursor-pointer">
               {{ error.message }}
             </a>
           </li>
@@ -69,12 +50,7 @@
             }"
           >
             {{ field.label }}
-            <span
-              v-if="field.required"
-              class="text-red-500 ml-1"
-              aria-label="required"
-              >*</span
-            >
+            <span v-if="field.required" class="text-red-500 ml-1" aria-label="required">*</span>
           </label>
 
           <!-- Field Description -->
@@ -90,17 +66,12 @@
             type="text"
             :placeholder="field.placeholder"
             :aria-invalid="hasError(field.id) && touched.has(field.id)"
-            :aria-describedby="
-              hasError(field.id) && touched.has(field.id)
-                ? `${field.id}-error`
-                : undefined
-            "
+            :aria-describedby="hasError(field.id) && touched.has(field.id) ? `${field.id}-error` : undefined"
             @blur="handleBlur(field.id)"
             @input="handleInput(field.id)"
             class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
             :class="{
-              'border-red-500 focus:ring-red-500':
-                hasError(field.id) && touched.has(field.id),
+              'border-red-500 focus:ring-red-500': hasError(field.id) && touched.has(field.id),
               'border-gray-300': !hasError(field.id) || !touched.has(field.id),
             }"
           />
@@ -113,17 +84,12 @@
             :placeholder="field.placeholder"
             :rows="field.rows || 4"
             :aria-invalid="hasError(field.id) && touched.has(field.id)"
-            :aria-describedby="
-              hasError(field.id) && touched.has(field.id)
-                ? `${field.id}-error`
-                : undefined
-            "
+            :aria-describedby="hasError(field.id) && touched.has(field.id) ? `${field.id}-error` : undefined"
             @blur="handleBlur(field.id)"
             @input="handleInput(field.id)"
             class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors resize-y"
             :class="{
-              'border-red-500 focus:ring-red-500':
-                hasError(field.id) && touched.has(field.id),
+              'border-red-500 focus:ring-red-500': hasError(field.id) && touched.has(field.id),
               'border-gray-300': !hasError(field.id) || !touched.has(field.id),
             }"
           />
@@ -138,17 +104,12 @@
             :max="field.max"
             :step="field.step"
             :aria-invalid="hasError(field.id) && touched.has(field.id)"
-            :aria-describedby="
-              hasError(field.id) && touched.has(field.id)
-                ? `${field.id}-error`
-                : undefined
-            "
+            :aria-describedby="hasError(field.id) && touched.has(field.id) ? `${field.id}-error` : undefined"
             @blur="handleBlur(field.id)"
             @input="handleInput(field.id)"
             class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
             :class="{
-              'border-red-500 focus:ring-red-500':
-                hasError(field.id) && touched.has(field.id),
+              'border-red-500 focus:ring-red-500': hasError(field.id) && touched.has(field.id),
               'border-gray-300': !hasError(field.id) || !touched.has(field.id),
             }"
           />
@@ -162,17 +123,12 @@
             :min="field.minDate"
             :max="field.maxDate"
             :aria-invalid="hasError(field.id) && touched.has(field.id)"
-            :aria-describedby="
-              hasError(field.id) && touched.has(field.id)
-                ? `${field.id}-error`
-                : undefined
-            "
+            :aria-describedby="hasError(field.id) && touched.has(field.id) ? `${field.id}-error` : undefined"
             @blur="handleBlur(field.id)"
             @change="handleInput(field.id)"
             class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
             :class="{
-              'border-red-500 focus:ring-red-500':
-                hasError(field.id) && touched.has(field.id),
+              'border-red-500 focus:ring-red-500': hasError(field.id) && touched.has(field.id),
               'border-gray-300': !hasError(field.id) || !touched.has(field.id),
             }"
           />
@@ -184,17 +140,12 @@
             v-model="formValues[field.id]"
             type="time"
             :aria-invalid="hasError(field.id) && touched.has(field.id)"
-            :aria-describedby="
-              hasError(field.id) && touched.has(field.id)
-                ? `${field.id}-error`
-                : undefined
-            "
+            :aria-describedby="hasError(field.id) && touched.has(field.id) ? `${field.id}-error` : undefined"
             @blur="handleBlur(field.id)"
             @change="handleInput(field.id)"
             class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
             :class="{
-              'border-red-500 focus:ring-red-500':
-                hasError(field.id) && touched.has(field.id),
+              'border-red-500 focus:ring-red-500': hasError(field.id) && touched.has(field.id),
               'border-gray-300': !hasError(field.id) || !touched.has(field.id),
             }"
           />
@@ -205,11 +156,7 @@
             class="space-y-2"
             role="radiogroup"
             :aria-invalid="hasError(field.id) && touched.has(field.id)"
-            :aria-describedby="
-              hasError(field.id) && touched.has(field.id)
-                ? `${field.id}-error`
-                : undefined
-            "
+            :aria-describedby="hasError(field.id) && touched.has(field.id) ? `${field.id}-error` : undefined"
           >
             <label
               v-for="(choice, index) in field.choices"
@@ -239,26 +186,17 @@
             :id="`input-${field.id}`"
             v-model="formValues[field.id]"
             :aria-invalid="hasError(field.id) && touched.has(field.id)"
-            :aria-describedby="
-              hasError(field.id) && touched.has(field.id)
-                ? `${field.id}-error`
-                : undefined
-            "
+            :aria-describedby="hasError(field.id) && touched.has(field.id) ? `${field.id}-error` : undefined"
             @blur="handleBlur(field.id)"
             @change="handleInput(field.id)"
             class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors bg-white"
             :class="{
-              'border-red-500 focus:ring-red-500':
-                hasError(field.id) && touched.has(field.id),
+              'border-red-500 focus:ring-red-500': hasError(field.id) && touched.has(field.id),
               'border-gray-300': !hasError(field.id) || !touched.has(field.id),
             }"
           >
             <option :value="null" disabled>Select an option...</option>
-            <option
-              v-for="(choice, index) in field.choices"
-              :key="index"
-              :value="index"
-            >
+            <option v-for="(choice, index) in field.choices" :key="index" :value="index">
               {{ choice }}
             </option>
           </select>
@@ -269,23 +207,15 @@
             class="space-y-2"
             role="group"
             :aria-invalid="hasError(field.id) && touched.has(field.id)"
-            :aria-describedby="
-              hasError(field.id) && touched.has(field.id)
-                ? `${field.id}-error`
-                : undefined
-            "
+            :aria-describedby="hasError(field.id) && touched.has(field.id) ? `${field.id}-error` : undefined"
           >
             <label
               v-for="(choice, index) in field.choices"
               :key="index"
               class="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer transition-all hover:bg-gray-50"
               :class="{
-                'border-blue-500 bg-blue-50': (
-                  formValues[field.id] || []
-                ).includes(index),
-                'border-gray-300': !(formValues[field.id] || []).includes(
-                  index,
-                ),
+                'border-blue-500 bg-blue-50': (formValues[field.id] || []).includes(index),
+                'border-gray-300': !(formValues[field.id] || []).includes(index),
               }"
             >
               <input
@@ -307,12 +237,7 @@
             class="flex items-center gap-2 mt-2 text-red-600 text-sm"
             role="alert"
           >
-            <svg
-              class="w-4 h-4 flex-shrink-0"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              aria-hidden="true"
-            >
+            <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path
                 fill-rule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -342,11 +267,7 @@
           <button
             type="submit"
             :disabled="submitted"
-            :class="
-              submitted
-                ? 'bg-green-600 cursor-default'
-                : 'bg-blue-600 hover:bg-blue-700'
-            "
+            :class="submitted ? 'bg-green-600 cursor-default' : 'bg-blue-600 hover:bg-blue-700'"
             class="px-8 py-3 rounded-lg text-white font-semibold text-lg transition-colors"
           >
             {{ submitted ? "Submitted" : "Submit Form" }}
@@ -354,10 +275,7 @@
         </div>
 
         <!-- Progress Indicator -->
-        <div class="mt-4 text-center text-gray-600 text-sm">
-          {{ filledRequiredCount }} / {{ requiredFieldsCount }} required fields
-          completed
-        </div>
+        <div class="mt-4 text-center text-gray-600 text-sm">{{ filledRequiredCount }} / {{ requiredFieldsCount }} required fields completed</div>
       </form>
     </div>
   </div>
@@ -366,15 +284,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
 import type { ToolResult } from "gui-chat-protocol";
-import type {
-  FormData,
-  FormField,
-  TextField,
-  TextareaField,
-  NumberField,
-  DateField,
-  CheckboxField,
-} from "../core/types";
+import type { FormData, FormField, TextField, TextareaField, NumberField, DateField, CheckboxField } from "../core/types";
 
 interface FieldError {
   fieldId: string;
@@ -413,11 +323,7 @@ watch(
   (newResult, oldResult) => {
     if (newResult?.toolName === "presentForm" && newResult.jsonData) {
       // Only restore if this is a different result (uuid changed, jsonData changed, or first load)
-      const isNewResult =
-        !oldResult ||
-        !oldResult.jsonData ||
-        oldResult.uuid !== newResult.uuid ||
-        oldResult.jsonData !== newResult.jsonData;
+      const isNewResult = !oldResult || !oldResult.jsonData || oldResult.uuid !== newResult.uuid || oldResult.jsonData !== newResult.jsonData;
 
       if (isNewResult) {
         isRestoring.value = true;
@@ -486,18 +392,14 @@ function getDefaultValue(field: FormField): any {
       case "radio":
       case "dropdown": {
         // Convert string value to index in choices
-        const choiceIndex = field.choices.indexOf(
-          fieldWithDefault.defaultValue as string,
-        );
+        const choiceIndex = field.choices.indexOf(fieldWithDefault.defaultValue as string);
         return choiceIndex !== -1 ? choiceIndex : null;
       }
 
       case "checkbox": {
         // Convert array of string values to array of indices
         if (Array.isArray(fieldWithDefault.defaultValue)) {
-          return fieldWithDefault.defaultValue
-            .map((val: string) => field.choices.indexOf(val))
-            .filter((idx: number) => idx !== -1);
+          return fieldWithDefault.defaultValue.map((val: string) => field.choices.indexOf(val)).filter((idx: number) => idx !== -1);
         }
         return [];
       }
@@ -514,9 +416,7 @@ function getDefaultValue(field: FormField): any {
     case "textarea":
       return "";
     case "number":
-      return (field as NumberField).min !== undefined
-        ? (field as NumberField).min
-        : 0;
+      return (field as NumberField).min !== undefined ? (field as NumberField).min : 0;
     case "date":
     case "time":
       return "";
@@ -582,12 +482,7 @@ function getErrorMessage(field: FormField, value: any): string | null {
       if (textField.validation === "phone" && !isValidPhone(value)) {
         return "Please enter a valid phone number";
       }
-      if (
-        typeof textField.validation === "string" &&
-        textField.validation !== "email" &&
-        textField.validation !== "url" &&
-        textField.validation !== "phone"
-      ) {
+      if (typeof textField.validation === "string" && textField.validation !== "email" && textField.validation !== "url" && textField.validation !== "phone") {
         try {
           if (!new RegExp(textField.validation).test(value)) {
             return `${field.label} format is invalid`;
@@ -635,16 +530,10 @@ function getErrorMessage(field: FormField, value: any): string | null {
     case "checkbox": {
       const checkboxField = field as CheckboxField;
       const selectedCount = value?.length || 0;
-      if (
-        checkboxField.minSelections &&
-        selectedCount < checkboxField.minSelections
-      ) {
+      if (checkboxField.minSelections && selectedCount < checkboxField.minSelections) {
         return `Please select at least ${checkboxField.minSelections} option${checkboxField.minSelections > 1 ? "s" : ""}`;
       }
-      if (
-        checkboxField.maxSelections &&
-        selectedCount > checkboxField.maxSelections
-      ) {
+      if (checkboxField.maxSelections && selectedCount > checkboxField.maxSelections) {
         return `Please select no more than ${checkboxField.maxSelections} option${checkboxField.maxSelections > 1 ? "s" : ""}`;
       }
       break;
@@ -699,10 +588,7 @@ function focusField(fieldId: string): void {
 }
 
 function showCharCount(field: FormField): boolean {
-  return (
-    (field.type === "text" || field.type === "textarea") &&
-    (field as TextField | TextareaField).maxLength !== undefined
-  );
+  return (field.type === "text" || field.type === "textarea") && (field as TextField | TextareaField).maxLength !== undefined;
 }
 
 function isNearLimit(field: FormField): boolean {
@@ -719,9 +605,7 @@ const requiredFieldsCount = computed(() => {
 
 const filledRequiredCount = computed(() => {
   if (!formData.value) return 0;
-  return formData.value.fields.filter(
-    (f) => f.required && !isEmpty(formValues.value[f.id]),
-  ).length;
+  return formData.value.fields.filter((f) => f.required && !isEmpty(formValues.value[f.id])).length;
 });
 
 function handleSubmit(): void {
@@ -757,9 +641,7 @@ function handleSubmit(): void {
       }
     } else if (field.type === "checkbox") {
       // Convert array of indices to array of values
-      responses[field.id] = (value || []).map(
-        (idx: number) => field.choices[idx],
-      );
+      responses[field.id] = (value || []).map((idx: number) => field.choices[idx]);
     } else {
       responses[field.id] = value;
     }

@@ -45,13 +45,7 @@ export type {
 } from "../core/types";
 
 // Core plugin utilities
-export {
-  TOOL_NAME,
-  TOOL_DEFINITION,
-  SAMPLES,
-  executeForm,
-  pluginCore,
-} from "../core/plugin";
+export { TOOL_NAME, TOOL_DEFINITION, SAMPLES, executeForm, pluginCore } from "../core/plugin";
 
 // Export components for direct use
 export { View, Preview };
