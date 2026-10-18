@@ -14,8 +14,7 @@ export default defineConfig({
       },
       name: "MulmoChatPluginForm",
       formats: ["es", "cjs"],
-      fileName: (format, entryName) =>
-        `${entryName}.${format === "es" ? "js" : "cjs"}`,
+      fileName: (format, entryName) => `${entryName}.${format === "es" ? "js" : "cjs"}`,
     },
     rollupOptions: {
       external: ["vue"],

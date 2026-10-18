@@ -10,15 +10,7 @@
 // ============================================================================
 
 /** Field type discriminator */
-export type FieldType =
-  | "text"
-  | "textarea"
-  | "radio"
-  | "dropdown"
-  | "checkbox"
-  | "date"
-  | "time"
-  | "number";
+export type FieldType = "text" | "textarea" | "radio" | "dropdown" | "checkbox" | "date" | "time" | "number";
 
 /** Base field interface */
 export interface BaseField {
@@ -100,15 +92,7 @@ export interface NumberField extends BaseField {
 }
 
 /** Union type for all fields */
-export type FormField =
-  | TextField
-  | TextareaField
-  | RadioField
-  | DropdownField
-  | CheckboxField
-  | DateField
-  | TimeField
-  | NumberField;
+export type FormField = TextField | TextareaField | RadioField | DropdownField | CheckboxField | DateField | TimeField | NumberField;
 
 /** Form data stored in result.jsonData */
 export interface FormData {

@@ -24,8 +24,7 @@ export const TOOL_DEFINITION: ToolDefinition = {
       },
       fields: {
         type: "array",
-        description:
-          "Array of form fields with various types and configurations",
+        description: "Array of form fields with various types and configurations",
         items: {
           type: "object",
           properties: {
@@ -36,16 +35,7 @@ export const TOOL_DEFINITION: ToolDefinition = {
             },
             type: {
               type: "string",
-              enum: [
-                "text",
-                "textarea",
-                "radio",
-                "dropdown",
-                "checkbox",
-                "date",
-                "time",
-                "number",
-              ],
+              enum: ["text", "textarea", "radio", "dropdown", "checkbox", "date", "time", "number"],
               description:
                 "Field type: 'text' for short text, 'textarea' for long text, 'radio' for 2-6 choices, 'dropdown' for many choices, 'checkbox' for multiple selections, 'date' for date picker, 'time' for time picker, 'number' for numeric input",
             },
@@ -67,8 +57,7 @@ export const TOOL_DEFINITION: ToolDefinition = {
             },
             validation: {
               type: "string",
-              description:
-                "For text fields: 'email', 'url', 'phone', or a regex pattern",
+              description: "For text fields: 'email', 'url', 'phone', or a regex pattern",
             },
             minLength: {
               type: "number",
@@ -85,8 +74,7 @@ export const TOOL_DEFINITION: ToolDefinition = {
             choices: {
               type: "array",
               items: { type: "string" },
-              description:
-                "Array of choices for radio/dropdown/checkbox fields. Radio should have 2-6 choices, dropdown for 7+ choices.",
+              description: "Array of choices for radio/dropdown/checkbox fields. Radio should have 2-6 choices, dropdown for 7+ choices.",
             },
             searchable: {
               type: "boolean",

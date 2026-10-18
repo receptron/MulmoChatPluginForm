@@ -82,8 +82,14 @@ describe("executeForm — ranges a field declares", () => {
   // Both of these render a form nobody can submit: the user is asked for more
   // selections than there are boxes to tick.
   it("refuses selection counts the choices cannot satisfy", async () => {
-    assert.match(await messageFor([{ id: "a", type: "checkbox", label: "A", choices: ["x"], maxSelections: 2 }]), /maxSelections cannot exceed number of choices/);
-    assert.match(await messageFor([{ id: "a", type: "checkbox", label: "A", choices: ["x"], minSelections: 2 }]), /minSelections cannot exceed number of choices/);
+    assert.match(
+      await messageFor([{ id: "a", type: "checkbox", label: "A", choices: ["x"], maxSelections: 2 }]),
+      /maxSelections cannot exceed number of choices/,
+    );
+    assert.match(
+      await messageFor([{ id: "a", type: "checkbox", label: "A", choices: ["x"], minSelections: 2 }]),
+      /minSelections cannot exceed number of choices/,
+    );
   });
 
   it("refuses too few choices", async () => {
@@ -116,7 +122,10 @@ describe("executeForm — defaultValue", () => {
 
   it("refuses a default outside the choices", async () => {
     assert.match(await messageFor([{ id: "a", type: "radio", label: "A", choices: ["x", "y"], defaultValue: "z" }]), /defaultValue 'z' is not in choices/);
-    assert.match(await messageFor([{ id: "a", type: "checkbox", label: "A", choices: ["x"], defaultValue: ["x", "q"] }]), /contains 'q' which is not in choices/);
+    assert.match(
+      await messageFor([{ id: "a", type: "checkbox", label: "A", choices: ["x"], defaultValue: ["x", "q"] }]),
+      /contains 'q' which is not in choices/,
+    );
   });
 
   it("refuses a default outside the range the same field declares", async () => {
