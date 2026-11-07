@@ -71,5 +71,9 @@
   "license": "MIT",
   "engines": {
     "node": ">=22"
+  },
+  "resolutions": {
+    "minimatch": "^11.0.5",
+    "glob": "^14.0.4"
   }
 }
